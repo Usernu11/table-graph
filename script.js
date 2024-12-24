@@ -30,18 +30,14 @@ for (let i = 0; i < yesterday.length; i++) {
     span.textContent = `${percentValues[i]}%`
 }
 
+let percent = null
+
 document.addEventListener('click', (e) => {
     const targetData = []
-    let percent = null
-    const span = document.createElement('span')
-    span.classList.add('percent')        
-
-    // save percent
-    if (e.target.parentNode.querySelector('.percent').classList.contains('percent')) {
+    // save and remove percent
+    if (e.target.parentNode.querySelector('.percent')) {
         percent = e.target.parentNode.querySelector('.percent').textContent
         e.target.parentNode.parentNode.querySelector('.percent').remove()
-        
-        console.log(percent)
     }
 
     // save data
@@ -57,22 +53,21 @@ document.addEventListener('click', (e) => {
 
         // console.log(targetData)
 
-        createChart(e.target.parentNode,
-            targetData)
+        createChart(e.target.parentNode, targetData)
         
-        e.target.parentNode.querySelector('.yesterday').appendChild(span)
-        span.textContent = percent
-        percent = null
+        // e.target.parentNode.querySelector('.yesterday').innerHTML = '<span class="percent"></span>'
+        // e.target.parentNode.querySelector('.yesterday .percent').textContent = percent
+        // percent = null
     }
 })
 
 // chart snippet
 const newChart = (data) => {
-    console.log(data)
-    console.log(data[0])
-    console.log(data[1].split(' ').join(''))
-    console.log(data[2])
-    console.log(data[3])
+    // console.log(data)
+    // console.log(data[0])
+    // console.log(data[1].split(' ').join(''))
+    // console.log(data[2])
+    // console.log(data[3])
     const chart = Highcharts.chart('chart', {
         chart: {
             type: 'line'
@@ -96,7 +91,7 @@ const newChart = (data) => {
 }
 
 const createChart = (target, data) => {
-    console.log(target);
+    // console.log(target);
     const newRow = document.createElement('tr')
 
     if (document.querySelector('.chart-wrapper')) {
