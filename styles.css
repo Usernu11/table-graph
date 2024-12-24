@@ -1,0 +1,70 @@
+table {
+    width: max-content;
+    border-collapse: collapse;
+    font-family: 'Roboto', sans-serif;
+    margin: 0 auto;
+    margin-top: 5%;
+    display: block;
+    font-weight: normal;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+tr {
+    cursor: pointer;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    background-color: #f2f2f2;
+    /* width: 300px; */
+}
+
+th {
+    font-weight: normal;
+}
+
+.name {
+    text-align-last: left;
+}
+
+.today {
+    text-align: right;
+    background-color: lightblue;
+}
+
+.yesterday {
+    display: flex;
+    justify-content: space-around;
+    border: none;
+    width: 100px;
+}
+
+.positive {
+    background-color: lightgreen;
+}
+
+.negative {
+    background-color: lightpink;
+}
+
+.percent {
+    font-weight: bold;
+    color: green;
+    margin-left: 10%;
+}
+
+.percent-positive {
+    color: green;
+    background-color: lightgreen;
+}
+
+.percent-negative {
+    color: red;
+    background-color: lightpink;
+}
+
+.week {
+    text-align: right;
+}
