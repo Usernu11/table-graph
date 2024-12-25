@@ -23,6 +23,7 @@ th, td {
 
 th {
     font-weight: normal;
+    cursor: default;
 }
 
 .name {

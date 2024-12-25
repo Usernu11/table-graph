@@ -35,13 +35,7 @@ for (let i = 0; i < yesterday.length; i++) {
 
 document.addEventListener('click', (e) => {
     const targetData = []
-    let text = ''
-    // save and remove percent    
-    // if (e.target.parentNode.querySelector('.percent')) {
-    //     curPercentValue = e.target.parentNode.querySelector('.percent').textContent
-    //     e.target.parentNode.querySelector('.percent').remove()
-    // }
-
+    // let text = ''
 
     // save data
     if (e.target.classList.contains('name') ||
