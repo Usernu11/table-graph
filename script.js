@@ -30,22 +30,18 @@ for (let i = 0; i < yesterday.length; i++) {
     span.textContent = `${percentValues[i]}%`
 }
 
-let curPercentValue = null
+// let curPercentValue = null
+// let curNumber = null
 
 document.addEventListener('click', (e) => {
     const targetData = []
-    // save and remove percent
-    // console.log(e.target)
-    // console.log(e.target.parentNode)
-    // console.log(e.target.parentNode.querySelector('.percent'))
-    // console.log(e.target.parentNode.querySelector('.percent').textContent)
-    
-    if (e.target.parentNode.querySelector('.percent')) {
-        curPercentValue = e.target.parentNode.querySelector('.percent').textContent
-        // console.log(curPercentValue)
-        e.target.parentNode.querySelector('.percent').remove()
+    let text = ''
+    // save and remove percent    
+    // if (e.target.parentNode.querySelector('.percent')) {
+    //     curPercentValue = e.target.parentNode.querySelector('.percent').textContent
+    //     e.target.parentNode.querySelector('.percent').remove()
+    // }
 
-    }
 
     // save data
     if (e.target.classList.contains('name') ||
@@ -55,10 +51,10 @@ document.addEventListener('click', (e) => {
 
         targetData.push(e.target.parentNode.querySelector('.name').textContent,
             e.target.parentNode.querySelector('.today').textContent,
-            e.target.parentNode.querySelector('.yesterday').textContent,
+            e.target.parentNode.querySelector('.yesterday').childNodes[0].textContent,
             e.target.parentNode.querySelector('.week').textContent)
 
-        // console.log(curPercentValue)
+        // console.log(e.target.parentNode.querySelector('.yesterday').childNodes[0])
 
         createChart(e.target.parentNode, targetData)
         
