@@ -3,6 +3,7 @@ const today = document.querySelector('.today');
 const yesterday = document.querySelectorAll('.yesterday');
 const chartWrapper = document.querySelector('.chart-wrapper');
 const tbody = document.querySelector('tbody');
+const values = document.querySelectorAll('.value');
 
 const percentValues = [4, 0, 0, 0, 44, 50, -9, 0, -6, -6]
 
@@ -102,3 +103,31 @@ const createChart = (target, data) => {
     target.after(newRow)
     newChart(data)
 }
+
+// sort by name
+document.addEventListener('click', (e) => {
+    let curValues = []
+
+    if (e.target.classList.contains('names')) {
+        values.forEach(value => {
+            // curValues.push(value.querySelector('.name').textContent)
+            curValues.push({
+                name: value.querySelector('.name').textContent,
+                today: value.querySelector('.today').textContent,
+                yesterday: value.querySelector('.yesterday').childNodes[0].textContent,
+                different: value.querySelector('.yesterday').childNodes[1].textContent,
+                week: value.querySelector('.week').textContent
+            })
+        })
+
+        // curValues.sort()
+
+        // values.forEach(value => {
+        //     value.querySelector('.name').textContent = curValues.shift()
+        // })
+
+
+        console.log(curValues)
+    }
+} 
+)
