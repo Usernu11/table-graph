@@ -113,12 +113,29 @@ document.addEventListener('click', (e) => {
             // curValues.push(value.querySelector('.name').textContent)
             curValues.push({
                 name: value.querySelector('.name').textContent,
-                today: value.querySelector('.today').textContent,
-                yesterday: value.querySelector('.yesterday').childNodes[0].textContent,
+                today: +value.querySelector('.today').textContent.replaceAll(' ', ''),
+                yesterday: +value.querySelector('.yesterday').childNodes[0].textContent.replaceAll(' ', ''),
                 different: value.querySelector('.yesterday').childNodes[1].textContent,
-                week: value.querySelector('.week').textContent
+                week: +value.querySelector('.week').textContent.replaceAll(' ', '')
             })
         })
+
+        if (e.target === document.querySelector('.names') && e.target.classList.contains('sorted') !== true) {
+
+            curValues.sort((a, b) => {
+                return a.name > b.name ? 1 : -1
+            })
+
+            e.target.classList.add('sorted')
+
+        } else if (e.target === document.querySelector('.names') && e.target.classList.contains('sorted') === true) {
+
+            curValues.sort((a, b) => {
+                return a.name < b.name ? 1 : -1
+            })
+
+            e.target.classList.remove('sorted')
+        }
 
         // curValues.sort()
 
@@ -126,8 +143,8 @@ document.addEventListener('click', (e) => {
         //     value.querySelector('.name').textContent = curValues.shift()
         // })
 
-
-        console.log(curValues)
+        console.log(e.target.classList)
+        console.table(curValues)
     }
 } 
 )
