@@ -1,6 +1,6 @@
 const number = document.querySelectorAll('.number');
 const today = document.querySelector('.today');
-const yesterday = document.querySelectorAll('.yesterday');
+const newYesterday = document.querySelectorAll('.yesterday');
 const chartWrapper = document.querySelector('.chart-wrapper');
 const tbody = document.querySelector('tbody');
 const values = document.querySelectorAll('.value');
@@ -17,7 +17,7 @@ number.forEach(element => {
 });
 
 // create %
-for (let i = 0; i < yesterday.length; i++) {
+for (let i = 0; i < newYesterday.length; i++) {
     const span = document.createElement('span')
     span.classList.add('percent')
 
@@ -27,7 +27,7 @@ for (let i = 0; i < yesterday.length; i++) {
         span.classList.add('percent-negative')
     }
 
-    yesterday[i].appendChild(span)
+    newYesterday[i].appendChild(span)
     span.textContent = `${percentValues[i]}%`
 }
 
@@ -109,14 +109,15 @@ document.addEventListener('click', (e) => {
     let curValues = []
 
     if (e.target.classList.contains('names')) {
+
         values.forEach(value => {
-            // curValues.push(value.querySelector('.name').textContent)
             curValues.push({
                 name: value.querySelector('.name').textContent,
                 today: +value.querySelector('.today').textContent.replaceAll(' ', ''),
                 yesterday: +value.querySelector('.yesterday').childNodes[0].textContent.replaceAll(' ', ''),
                 different: value.querySelector('.yesterday').childNodes[1].textContent,
-                week: +value.querySelector('.week').textContent.replaceAll(' ', '')
+                week: +value.querySelector('.week').textContent.replaceAll(' ', ''),
+                weekClasss: value.querySelector('.week').classList
             })
         })
 
@@ -137,14 +138,53 @@ document.addEventListener('click', (e) => {
             e.target.classList.remove('sorted')
         }
 
-        // curValues.sort()
+        // rewrite table values
+        tbody.innerHTML = ''
+        curValues.forEach(value => {
 
-        // values.forEach(value => {
-        //     value.querySelector('.name').textContent = curValues.shift()
-        // })
+            tbody.innerHTML += `
+            <tr class="value">
+                <td class="name">${value.name}</td>
+                <td class="today number">${value.today}</td>
+                <td class="yesterday number">${value.yesterday} <span class="percent">${value.different}</span></td>
+                <td class="week number">${value.week}</td>
+            </tr>
+            `
+        })
 
-        console.log(e.target.classList)
-        console.table(curValues)
+        // color yesterday cells (create classes for yesterday)
+        let newYesterday = document.querySelectorAll('.yesterday')
+
+        for (let i = 0; i < newYesterday.length; i++) {
+            if (newYesterday[i].childNodes[1].textContent.slice(0, -1) > 0) {
+                newYesterday[i].classList.add('positive')
+            } else if (newYesterday[i].childNodes[1].textContent.slice(0, -1) < 0) {
+                newYesterday[i].classList.add('negative')
+            }
+        }
+
+        // color percents (create classes for percents)
+        let newPercent = document.querySelectorAll('.percent')
+
+        for (let i = 0; i < newPercent.length; i++) {
+            if (newPercent[i].textContent.slice(0, -1) > 0) {
+                newPercent[i].classList.add('percent-positive')
+            } else if (newPercent[i].textContent.slice(0, -1) < 0) {
+                newPercent[i].classList.add('percent-negative')
+            }
+        }
+
+        // color week cells (create classes for week)
+        let newWeek = document.querySelectorAll('.week')
+
+        for (let i = 0; i < newWeek.length; i++) {
+            // 32, 900, 4805121 - just for example
+            if (+newWeek[i].textContent === 32 ||
+                +newWeek[i].textContent === 900) {
+                newWeek[i].classList.add('positive')
+            } else if (+newWeek[i].textContent === 4805121) {
+                newWeek[i].classList.add('negative')
+            }
+        }
     }
-} 
-)
+})
