@@ -8,6 +8,7 @@ table {
     font-weight: normal;
     border-collapse: separate;
     border-spacing: 10px;
+    /* transition: all 0.5s ease-in-out; */
 }
 
 tr {
@@ -18,12 +19,27 @@ th, td {
     padding: 10px;
     text-align: center;
     background-color: #f2f2f2;
+    /* transition: all 0.5s ease-in-out; */
     /* width: 300px; */
 }
 
 th {
     font-weight: normal;
     cursor: default;
+    /* transition: all 0.5s ease-in-out; */
+}
+
+tr>th {
+    transition: all .2s ease-in-out;
+    cursor: pointer;
+}
+
+tr>th:active {
+    box-shadow: inset 0 0 20px 1px rgba(0, 0, 0, .2);
+}
+
+.names:hover {
+    background-color: lightgray;
 }
 
 .name {
@@ -35,11 +51,19 @@ th {
     background-color: lightblue;
 }
 
+.today:hover {
+    background-color: lightskyblue;
+}
+
 .yesterday {
     display: flex;
     justify-content: space-around;
     border: none;
     width: 100px;
+}
+
+.yesterday-title:hover {
+    background-color: lightgray;
 }
 
 .positive {
@@ -68,4 +92,8 @@ th {
 
 .week {
     text-align: right;
+}
+
+.weeks:hover {
+    background-color: lightgray;
 }
