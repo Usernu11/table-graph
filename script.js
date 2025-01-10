@@ -192,3 +192,91 @@ document.addEventListener('click', (e) => {
         }
     }
 })
+
+// sort by days
+document.addEventListener('click', (e) => {
+    let curValues = []
+
+    if (e.target.classList.contains('days')) {
+
+        values.forEach(value => {
+            curValues.push({
+                name: value.querySelector('.name').textContent,
+                today: +value.querySelector('.today').textContent.replaceAll(' ', ''),
+                yesterday: +value.querySelector('.yesterday').childNodes[0].textContent.replaceAll(' ', ''),
+                different: value.querySelector('.yesterday').childNodes[1].textContent,
+                week: +value.querySelector('.week').textContent.replaceAll(' ', ''),
+                weekClasss: value.querySelector('.week').classList
+            })
+        })
+
+        if (e.target === document.querySelector('.days') && e.target.classList.contains('sorted') !== true) {
+
+            curValues.sort((a, b) => {
+                return a.today > b.today ? 1 : -1
+            })
+
+            e.target.classList.add('sorted')
+
+        } else if (e.target === document.querySelector('.days') && e.target.classList.contains('sorted') === true) {
+
+            curValues.sort((a, b) => {
+                return a.today < b.today ? 1 : -1
+            })
+
+            e.target.classList.remove('sorted')
+        }
+
+        // rewrite table values
+        tbody.innerHTML = ''
+        curValues.forEach(value => {
+
+            // toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") ---> format number ↓
+            // 4000000 to 4 000 000
+            tbody.innerHTML += `
+            <tr class="value">
+                <td class="name">${value.name.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</td>
+                <td class="today number">${value.today.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</td>
+                <td class="yesterday number">${value.yesterday.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} <span class="percent">${value.different}</span></td>
+                <td class="week number">${value.week.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</td>
+            </tr>
+            `
+        })
+
+    }
+
+    // color yesterday cells (create classes for yesterday)
+    let newYesterday = document.querySelectorAll('.yesterday')
+
+    for (let i = 0; i < newYesterday.length; i++) {
+        if (newYesterday[i].childNodes[1].textContent.slice(0, -1) > 0) {
+            newYesterday[i].classList.add('positive')
+        } else if (newYesterday[i].childNodes[1].textContent.slice(0, -1) < 0) {
+            newYesterday[i].classList.add('negative')
+        }
+    }
+
+    // color percents (create classes for percents)
+    let newPercent = document.querySelectorAll('.percent')
+
+    for (let i = 0; i < newPercent.length; i++) {
+        if (newPercent[i].textContent.slice(0, -1) > 0) {
+            newPercent[i].classList.add('percent-positive')
+        } else if (newPercent[i].textContent.slice(0, -1) < 0) {
+            newPercent[i].classList.add('percent-negative')
+        }
+    }
+
+    // color week cells (create classes for week)
+    let newWeek = document.querySelectorAll('.week')
+
+    for (let i = 0; i < newWeek.length; i++) {
+        // 32, 900, 4805121 - just for example
+        if (+newWeek[i].textContent === 32 ||
+            +newWeek[i].textContent === 900) {
+            newWeek[i].classList.add('positive')
+        } else if (+newWeek[i].textContent === 4805121) {
+            newWeek[i].classList.add('negative')
+        }
+    }
+})
