@@ -11,9 +11,26 @@ table {
     /* transition: all 0.5s ease-in-out; */
 }
 
-tr {
-    cursor: pointer;
+/* animation for rows */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(0px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
+/* animation for rows */
+tr, td {
+    cursor: pointer;
+    animation: fadeIn .4s ease-in-out;
+}
+
+
+
 
 th, td {
     padding: 10px;
