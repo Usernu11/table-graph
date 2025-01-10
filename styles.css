@@ -29,8 +29,9 @@ tr, td {
     animation: fadeIn .4s ease-in-out;
 }
 
-
-
+.chart-wrapper {
+    animation: fadeIn .8s ease-in-out;
+}
 
 th, td {
     padding: 10px;

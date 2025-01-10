@@ -102,6 +102,8 @@ const createChart = (target, data) => {
 
     target.after(newRow)
     newChart(data)
+
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // sort by name
