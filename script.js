@@ -52,7 +52,7 @@ document.addEventListener('click', (e) => {
         // console.log(e.target.parentNode.querySelector('.yesterday').childNodes[0])
 
         createChart(e.target.parentNode, targetData)
-        
+
         // e.target.parentNode.querySelector('.yesterday').innerHTML = '<span class="percent"></span>'
         // e.target.parentNode.querySelector('.yesterday .percent').textContent = curPercentValue
     }
@@ -142,12 +142,14 @@ document.addEventListener('click', (e) => {
         tbody.innerHTML = ''
         curValues.forEach(value => {
 
+            // toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") ---> format number ↓
+            // 4000000 to 4 000 000
             tbody.innerHTML += `
             <tr class="value">
-                <td class="name">${value.name}</td>
-                <td class="today number">${value.today}</td>
-                <td class="yesterday number">${value.yesterday} <span class="percent">${value.different}</span></td>
-                <td class="week number">${value.week}</td>
+                <td class="name">${value.name.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</td>
+                <td class="today number">${value.today.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</td>
+                <td class="yesterday number">${value.yesterday.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")} <span class="percent">${value.different}</span></td>
+                <td class="week number">${value.week.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ")}</td>
             </tr>
             `
         })

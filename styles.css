@@ -51,7 +51,7 @@ tr>th:active {
     background-color: lightblue;
 }
 
-.today:hover {
+.days:hover {
     background-color: lightskyblue;
 }
 
