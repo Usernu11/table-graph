@@ -187,7 +187,7 @@ document.addEventListener('click', (e) => {
             if (+newWeek[i].textContent === 32 ||
                 +newWeek[i].textContent === 900) {
                 newWeek[i].classList.add('positive')
-            } else if (+newWeek[i].textContent === 4805121) {
+            } else if (+newWeek[i].textContent.replaceAll(' ', '') === 4805121) {
                 newWeek[i].classList.add('negative')
             }
         }
@@ -276,7 +276,7 @@ document.addEventListener('click', (e) => {
         if (+newWeek[i].textContent === 32 ||
             +newWeek[i].textContent === 900) {
             newWeek[i].classList.add('positive')
-        } else if (+newWeek[i].textContent === 4805121) {
+        } else if (+newWeek[i].textContent.replaceAll(' ', '') === 4805121) {
             newWeek[i].classList.add('negative')
         }
     }
@@ -355,6 +355,8 @@ document.addEventListener('click', (e) => {
     // color week cells (create classes for week)
     let newWeek = document.querySelectorAll('.week')
 
+    // console.log(+newWeek[9].textContent.replaceAll(' ', ''))
+
     for (let i = 0; i < newWeek.length; i++) {
         // 32, 900, 4805121 - just for example
         // console.log(+newWeek[i].textContent)
@@ -362,9 +364,12 @@ document.addEventListener('click', (e) => {
         if (+newWeek[i].textContent === 32 ||
             +newWeek[i].textContent === 900) {
             newWeek[i].classList.add('positive')
-        } else if (+newWeek[i].textContent === 4805121) {
+
+        } else if (+newWeek[i].textContent.replaceAll(' ', '') === 4805121) {
             newWeek[i].classList.add('negative')
         }
+
+        // console.log(newWeek[i].textContent)
     }
 })
 
@@ -450,7 +455,7 @@ document.addEventListener('click', (e) => {
             if (+newWeek[i].textContent === 32 ||
                 +newWeek[i].textContent === 900) {
                 newWeek[i].classList.add('positive')
-            } else if (+newWeek[i].textContent === 4805121) {
+            } else if (+newWeek[i].textContent.replaceAll(' ', '') === 4805121) {
                 newWeek[i].classList.add('negative')
             }
         }
