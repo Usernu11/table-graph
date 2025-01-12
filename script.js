@@ -34,9 +34,9 @@ for (let i = 0; i < newYesterday.length; i++) {
 // let curPercentValue = null
 // let curNumber = null
 
+// save data
 document.addEventListener('click', (e) => {
     const targetData = []
-    // let text = ''
 
     // save data
     if (e.target.classList.contains('name') ||
@@ -44,18 +44,15 @@ document.addEventListener('click', (e) => {
         e.target.classList.contains('yesterday') ||
         e.target.classList.contains('week')) {
 
+        // error here
         targetData.push(
             e.target.parentNode.querySelector('.name').textContent,
             e.target.parentNode.querySelector('.today').textContent,
             e.target.parentNode.querySelector('.yesterday').childNodes[0].textContent,
-            e.target.parentNode.querySelector('.week').textContent)
-
-        // console.log(e.target.parentNode.querySelector('.yesterday').childNodes[0])
+            e.target.parentNode.querySelector('.week').textContent
+        )
 
         createChart(e.target.parentNode, targetData)
-
-        // e.target.parentNode.querySelector('.yesterday').innerHTML = '<span class="percent"></span>'
-        // e.target.parentNode.querySelector('.yesterday .percent').textContent = curPercentValue
     }
 })
 
@@ -84,7 +81,12 @@ const newChart = (data) => {
         series: [{
             name: '',
             data: [+data[1].split(' ').join(''), +data[2].split(' ').join(''), +data[3].split(' ').join('')]
-        }]
+        }],
+        accessibility: {
+            point: {
+                valueSuffix: `${data[0]}`
+            }
+        }
     });
 }
 
@@ -376,7 +378,7 @@ document.addEventListener('click', (e) => {
 // sort by yesterday
 document.addEventListener('click', (e) => {
     let curValues = []
-    
+
     if (e.target.classList.contains('yesterday-title')) {
         // console.log('c') ✅
         // saving values
@@ -462,4 +464,4 @@ document.addEventListener('click', (e) => {
     }
 })
 
-// 14:15
+// 15:12

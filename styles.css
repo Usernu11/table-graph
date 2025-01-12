@@ -69,6 +69,10 @@ tr>th:active {
     background-color: lightblue;
 }
 
+.days {
+    background-color: lightblue;
+}
+
 .days:hover {
     background-color: lightskyblue;
 }
