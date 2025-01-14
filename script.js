@@ -113,7 +113,9 @@ const createChart = (target, data) => {
 const sortFunction = (target, title, sortParam) => {
     let curValues = []
     let titleName = title.replace('.', '')
-
+    const titles = document.querySelectorAll('th')
+    
+    // console.log(titles)
     // console.log('target', target)
     // console.log('doc.qs(title)', document.querySelector(title))
     // console.log('target === doc.qs(title)', target === document.querySelector(title))
@@ -136,6 +138,8 @@ const sortFunction = (target, title, sortParam) => {
             })
         })
 
+        // console.table(curValues) // изначальная таблица (можно использовать для обновления, всегда одинаковая)
+
         // console.log(sortParam)
         // console.log(curValues[0].sortParam)
 
@@ -150,6 +154,12 @@ const sortFunction = (target, title, sortParam) => {
             target === document.querySelector(title) && 
             target.classList.contains('sorted') !== true
             ) {
+                titles.forEach(th => {
+                    if (th.classList.contains('sorted')) {
+                        th.classList.remove('sorted')
+                    }
+                })
+
                 // sort by ascending
                 curValues.sort((a, b) => {
                 return a[sortParam] > b[sortParam] ? 1 : -1
@@ -241,7 +251,6 @@ const updateCellStyles = () => {
      }
 }
 
-// 15:12
 // 468 lines (not optimized)
 // 242 lines (optimized)
 // 226 lines removed
